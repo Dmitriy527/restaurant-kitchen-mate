@@ -1,3 +1,5 @@
+from lib2to3.fixes.fix_input import context
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
@@ -25,7 +27,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "kitchen/index.html", context=context)
 
 
-class DishTypesList(LoginRequiredMixin, generic.ListView):
+class DishTypesListView(LoginRequiredMixin, generic.ListView):
     model = DishType
     context_object_name = "dish_types_list"
     template_name = "kitchen/dish_types_list.html"
