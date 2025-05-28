@@ -15,7 +15,7 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
-{#        <th>Update</th>#}
+        <th>Update</th>
 {#        <th>Delete</th>#}
       </tr>
 
@@ -26,6 +26,11 @@
           </td>
           <td>
               {{ dish_type.name }}
+          </td>
+          <td>
+            <a href="{% url "kitchen_core:dish-types-update" pk=dish_type.id %}">
+              Update
+            </a>
           </td>
         </tr>
       {% endfor %}
