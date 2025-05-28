@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Dish list
+  </h1>
+  
+  {% include "includes/search_field.html" %}
+  
+  {% if dish_list %}
+    <ul>
+      {% for dish in dish_list %}
+        <li>
+          {{ dish.id }}
+          {{ dish }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no cars in taxi</p>
+  {% endif %}
+{% endblock %}
