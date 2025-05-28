@@ -7,6 +7,9 @@
   <p>Dish type: {{ dish.dish_type.name }}</p>
   <h1>
     Cooks
+    <a href="{% url "kitchen_core:dish-update" pk=dish.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
   </h1>
   <hr>
   <ul>
