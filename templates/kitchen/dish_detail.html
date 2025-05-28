@@ -11,10 +11,20 @@
     <a href="{% url "kitchen_core:dish-delete" pk=dish.id %}" class="btn btn-danger link-to-page">
       Delete
     </a>
-    
+
     <a href="{% url "kitchen_core:dish-update" pk=dish.id %}" class="btn btn-secondary link-to-page">
       Update
     </a>
+  
+    {% if dish in user.dishes.all %}
+      <a href="{% url "kitchen_core:switch-assign-cook" pk=dish.id %}" class="btn btn-danger link-to-page">
+        Delete me from this dish
+      </a>
+    {% else %}
+      <a href="{% url "kitchen_core:switch-assign-cook" pk=dish.id %}" class="btn btn-success link-to-page">
+        Assign me from this dish
+      </a>
+    {% endif %}
   </h1>
   <hr>
   <ul>
