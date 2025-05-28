@@ -11,6 +11,7 @@ from kitchen_core.views import (
     DishCreateView,
     DishDetailView,
     DishUpdateView,
+    DishDeleteView,
 
 )
 
@@ -24,6 +25,7 @@ urlpatterns = [
     path("dishes/create/", DishCreateView.as_view(), name="dish-create"),
     path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
     path("dishes/<int:pk>/update/", DishUpdateView.as_view(), name="dish-update"),
+    path("dishes/<int:pk>/delete/", DishDeleteView.as_view(), name="dish-delete"),
 ]
 
 app_name = "kitchen_core"
