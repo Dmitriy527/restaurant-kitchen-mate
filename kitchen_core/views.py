@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from kitchen_core.forms import DishTypeSearchForm
@@ -48,3 +49,10 @@ class DishTypesListView(LoginRequiredMixin, generic.ListView):
                 name__icontains=form.cleaned_data["name_dish_type"]
             )
         return queryset
+
+
+class DishTypesCreateView(LoginRequiredMixin, generic.CreateView):
+    model = DishType
+    fields = "__all__"
+    template_name = "kitchen/dish_type_form.html"
+    success_url = reverse_lazy("kitchen_core:dish-types-list")
