@@ -5,8 +5,13 @@
     {{ dish.name }}
   </h1>
   <p>Dish type: {{ dish.dish_type.name }}</p>
+  <p>Description: {{ dish.description }}</p>
   <h1>
     Cooks
+    <a href="{% url "kitchen_core:dish-delete" pk=dish.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+    
     <a href="{% url "kitchen_core:dish-update" pk=dish.id %}" class="btn btn-secondary link-to-page">
       Update
     </a>
