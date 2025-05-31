@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from kitchen_core.forms import DishTypeSearchForm, DishSearchForm, DishForm
+from kitchen_core.forms import DishTypeSearchForm, DishSearchForm, DishForm, CookSearchForm
 from kitchen_core.models import Cook, DishType, Dish
 
 
@@ -129,3 +129,26 @@ def switch_assign_to_food(request: HttpRequest, pk):
     else:
         cook.dishes.add(pk)
     return HttpResponseRedirect(reverse_lazy("kitchen_core:dish-detail", kwargs={"pk": pk}))
+
+
+class CookListView(LoginRequiredMixin, generic.ListView):
+    model = Cook
+    template_name = "kitchen/cook_list.html"
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CookListView, self).get_context_data(**kwargs)
+        name_cook = self.request.GET.get("name_cook")
+        context["search_field"] = CookSearchForm(
+            initial={"name_cook": name_cook}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Cook.objects.all()
+        form = CookSearchForm(self.request.GET)
+        if form.is_valid():
+            queryset = queryset.filter(
+                username__icontains=form.cleaned_data["name_cook"]
+            )
+        return queryset
