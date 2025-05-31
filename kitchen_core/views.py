@@ -6,7 +6,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from kitchen_core.forms import DishTypeSearchForm, DishSearchForm, DishForm, CookSearchForm, CookCreationForm
+from kitchen_core.forms import DishTypeSearchForm, DishSearchForm, DishForm, CookSearchForm, CookCreationForm, \
+    CookUpdateForm
 from kitchen_core.models import Cook, DishType, Dish
 
 
@@ -165,3 +166,10 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
     queryset = get_user_model().objects.all().prefetch_related("dishes__dish_type")
     template_name = "kitchen/cook_detail.html"
+
+
+class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Cook
+    form_class = CookUpdateForm
+    template_name = "kitchen/cook_form.html"
+    success_url = reverse_lazy("kitchen_core:cooks-list")
