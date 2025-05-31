@@ -22,7 +22,12 @@
     {% for cook in cook_list %}
       <tr>
         <td>{{ cook.id }}</td>
-        <td>{{ cook.username }} {% if user == cook %} (Me){% endif %}</td>
+        <td>
+          <a href="{% url "kitchen_core:cooks-detail" pk=cook.id %}">
+            {{ cook.username }}
+          </a> 
+          {% if user == cook %} (Me){% endif %}
+        </td>
         <td>{{ cook.first_name }}</td>
         <td>{{ cook.last_name }}</td>
         <td>{{ cook.years_of_experience }}</td>
