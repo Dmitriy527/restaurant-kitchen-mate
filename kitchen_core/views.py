@@ -159,3 +159,9 @@ class CookCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = CookCreationForm
     template_name = "kitchen/cook_form.html"
     success_url = reverse_lazy("kitchen_core:cooks-list")
+
+
+class CookDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Cook
+    queryset = get_user_model().objects.all().prefetch_related("dishes__dish_type")
+    template_name = "kitchen/cook_detail.html"
