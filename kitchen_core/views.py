@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from kitchen_core.forms import DishTypeSearchForm, DishSearchForm, DishForm, CookSearchForm
+from kitchen_core.forms import DishTypeSearchForm, DishSearchForm, DishForm, CookSearchForm, CookCreationForm
 from kitchen_core.models import Cook, DishType, Dish
 
 
@@ -152,3 +152,10 @@ class CookListView(LoginRequiredMixin, generic.ListView):
                 username__icontains=form.cleaned_data["name_cook"]
             )
         return queryset
+
+
+class CookCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Cook
+    form_class = CookCreationForm
+    template_name = "kitchen/cook_form.html"
+    success_url = reverse_lazy("kitchen_core:cooks-list")
