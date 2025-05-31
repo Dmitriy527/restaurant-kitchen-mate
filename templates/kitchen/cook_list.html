@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+      Cook List
+    </h1>
+
+    {% include "includes/search_field.html" %}
+
+    {% if cook_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Years of experience</th>
+      </tr>
+    {% for cook in cook_list %}
+      <tr>
+        <td>{{ cook.id }}</td>
+        <td>{{ cook.username }} {% if user == cook %} (Me){% endif %}</td>
+        <td>{{ cook.first_name }}</td>
+        <td>{{ cook.last_name }}</td>
+        <td>{{ cook.years_of_experience }}</td>
+      </tr>
+    {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no cooks in the service.</p>
+    {% endif %}
+{% endblock %}
