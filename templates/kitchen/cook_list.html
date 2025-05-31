@@ -3,6 +3,9 @@
 {% block content %}
     <h1>
       Cook List
+      <a href="{% url "kitchen_core:cooks-create" %}" class="btn btn-primary link-to-page">
+        Create
+      </a>
     </h1>
 
     {% include "includes/search_field.html" %}
