@@ -12,7 +12,8 @@ class DishTypeSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "search by name"}
+            attrs={"placeholder": "search by name",
+                   'class': 'form-control'}
         )
     )
 
@@ -23,7 +24,8 @@ class DishSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "search by name"}
+            attrs={"placeholder": "search by name",
+                   'class': 'form-control'}
         )
     )
 
@@ -34,7 +36,8 @@ class CookSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "search by username"}
+            attrs={"placeholder": "search by username",
+                   'class': 'form-control'}
         )
     )
 

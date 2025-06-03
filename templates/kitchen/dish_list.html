@@ -1,25 +1,48 @@
-{% extends "base.html" %}
+{% extends 'layouts/base-presentation.html' %}
 
 {% block content %}
-  <h1>
-    Dish list
-    <a href="{% url "kitchen_core:dish-create" %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  
-  {% include "includes/search_field.html" %}
-  
-  {% if dish_list %}
-    <ul>
-      {% for dish in dish_list %}
-        <li>
-          <a href="{% url "kitchen_core:dish-detail" pk=dish.id %}">{{ dish.id }}</a>
-          {{ dish }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no cars in taxi</p>
-  {% endif %}
+  <div class="container mt-7">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <!-- Заголовок з кнопкою -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="mb-0">Dish list</h1>
+          <a href="{% url 'kitchen_core:dish-create' %}" class="btn btn-primary">
+            Create new dish
+          </a>
+        </div>
+
+        <!-- Список страв -->
+        {% if dish_list %}
+          <div class="card shadow-sm">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush">
+                {% for dish in dish_list %}
+                  <li class="list-group-item">
+                    <a href="{% url 'kitchen_core:dish-detail' pk=dish.id %}" 
+                       class="d-flex justify-content-between align-items-center text-decoration-none p-3 mb-2 bg-white rounded-lg shadow-soft">
+                       <div class="d-flex align-items-center">
+                         <span class="icon icon-shape icon-sm bg-gradient-primary shadow-soft text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                           <i class="fas fa-utensils"></i>
+                         </span>
+                         <span class="fw-bold text-dark">{{ dish.name }}</span>
+                       </div>
+                       <span class="badge bg-gradient-light text-dark shadow-soft rounded-pill px-3 py-2">
+                         ID: {{ dish.id }}
+                       </span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% else %}
+          <div class="alert alert-info text-center py-4">
+            <i class="bi bi-info-circle me-2"></i>
+            There are no dishes in the kitchen
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}

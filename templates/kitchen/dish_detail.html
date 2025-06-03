@@ -1,35 +1,66 @@
-{% extends "base.html" %}
+{% extends 'layouts/base-presentation.html' %}
 
 {% block content %}
-  <h1>
-    {{ dish.name }}
-  </h1>
-  <p>Dish type: {{ dish.dish_type.name }}</p>
-  <p>Description: {{ dish.description }}</p>
-  <h1>
-    Cooks
-    <a href="{% url "kitchen_core:dish-delete" pk=dish.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
+  <div class="container mt-7">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- Dish Header with Actions -->
+        <div class="text-center mb-5">
+          <h1 class="display-4 mb-4">{{ dish.name }}</h1>
+          
+          <div class="d-flex justify-content-center gap-3 mb-4">
+            <a href="{% url 'kitchen_core:dish-update' pk=dish.id %}" class="btn btn-secondary">
+              Update dish
+            </a>
+            <a href="{% url 'kitchen_core:dish-delete' pk=dish.id %}" class="btn btn-danger">
+              Delete dish
+            </a>
+            {% if dish in user.dishes.all %}
+              <a href="{% url 'kitchen_core:switch-assign-cook' pk=dish.id %}" class="btn btn-outline-danger">
+                Delete me from this dish
+              </a>
+            {% else %}
+              <a href="{% url 'kitchen_core:switch-assign-cook' pk=dish.id %}" class="btn btn-success">
+                Assign me to this dish
+              </a>
+            {% endif %}
+          </div>
+        </div>
 
-    <a href="{% url "kitchen_core:dish-update" pk=dish.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  
-    {% if dish in user.dishes.all %}
-      <a href="{% url "kitchen_core:switch-assign-cook" pk=dish.id %}" class="btn btn-danger link-to-page">
-        Delete me from this dish
-      </a>
-    {% else %}
-      <a href="{% url "kitchen_core:switch-assign-cook" pk=dish.id %}" class="btn btn-success link-to-page">
-        Assign me from this dish
-      </a>
-    {% endif %}
-  </h1>
-  <hr>
-  <ul>
-    {% for cook in dish.cooks.all %}
-      <li>{{ cook.username }} ({{ cook.first_name }} {{ cook.last_name }})</li>
-    {% endfor %}
-  </ul>
+        <!-- Dish Details -->
+        <div class="card shadow-sm mb-5">
+          <div class="card-body text-center">
+            <h3 class="card-title mb-3">
+              Dish type: <span class="text-primary">{{ dish.dish_type.name }}</span>
+            </h3>
+            <p class="card-text lead">{{ dish.description }}</p>
+          </div>
+        </div>
+
+        <!-- Cooks Section -->
+        <div class="text-center">
+          <h1 class="mb-4">Cooks</h1>
+          <hr class="mx-auto" style="width: 50%;">
+          
+          <div class="list-group mx-auto" style="max-width: 400px;">
+            {% for cook in dish.cooks.all %}
+              <div class="list-group-item">
+                <h4 class="mb-1">
+                  {{ cook.username }}
+                  {% if cook.first_name or cook.last_name %}
+                    <small class="text-muted">({{ cook.first_name }} {{ cook.last_name }})</small>
+                  {% endif %}
+                  {% if user == cook %} <span class="badge bg-primary">Me</span>{% endif %}
+                </h4>
+              </div>
+            {% empty %}
+              <div class="list-group-item">
+                <p class="text-muted">No cooks assigned yet</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

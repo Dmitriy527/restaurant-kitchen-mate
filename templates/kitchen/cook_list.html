@@ -1,41 +1,78 @@
-{% extends "base.html" %}
+{% extends 'layouts/base-presentation.html' %}
 
 {% block content %}
-    <h1>
-      Cook List
-      <a href="{% url "kitchen_core:cooks-create" %}" class="btn btn-primary link-to-page">
-        Create
-      </a>
-    </h1>
-
-    {% include "includes/search_field.html" %}
-
-    {% if cook_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Years of experience</th>
-      </tr>
-    {% for cook in cook_list %}
-      <tr>
-        <td>{{ cook.id }}</td>
-        <td>
-          <a href="{{ cook.get_absolute_url }}">
-            {{ cook.username }}
-            {% if user == cook %} (Me){% endif %}
+  <div class="container mt-7">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <!-- Header with Button -->
+        <h1 class="mb-4">
+          Cook List
+          <a href="{% url 'kitchen_core:cooks-create' %}" class="btn btn-primary">
+            Register new user
           </a>
-        </td>
-        <td>{{ cook.first_name }}</td>
-        <td>{{ cook.last_name }}</td>
-        <td>{{ cook.years_of_experience }}</td>
-      </tr>
-    {% endfor %}
+        </h1>
 
-    </table>
-    {% else %}
-      <p>There are no cooks in the service.</p>
-    {% endif %}
+        {% if cook_list %}
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Years of experience</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cook in cook_list %}
+              <tr>
+                <td>{{ cook.id }}</td>
+                <td>
+                  <a href="{{ cook.get_absolute_url }}" 
+                     class="d-flex align-items-center text-decoration-none p-2 rounded-pill shadow-soft-hover"
+                     style="background: rgba(0,0,0,0.02); transition: all 0.3s ease;">
+                    <div class="icon-shape bg-gradient-primary text-white rounded-circle me-2" 
+                         style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                      <i class="fas fa-user fa-sm"></i>
+                    </div>
+                    <span class="fw-bold text-dark">
+                      {{ cook.username }}
+                      {% if user == cook %}
+                        <span class="badge bg-gradient-info text-white ms-2">Me</span>
+                      {% endif %}
+                    </span>
+                  </a>
+                </td>
+                <td>{{ cook.first_name }}</td>
+                <td>{{ cook.last_name }}</td>
+                <td>
+                  <span class="badge bg-gradient-{% if cook.years_of_experience > 5 %}success{% elif cook.years_of_experience > 2 %}warning{% else %}light{% endif %}">
+                    {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
+                  </span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+          <p class="text-muted">There are no cooks in the service.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .shadow-soft-hover:hover {
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+    }
+    .icon-shape {
+      transition: all 0.3s ease;
+    }
+    a:hover .icon-shape {
+      transform: scale(1.1);
+    }
+  </style>
 {% endblock %}
