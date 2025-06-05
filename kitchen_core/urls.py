@@ -32,12 +32,12 @@ urlpatterns = [
     path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
     path("dishes/<int:pk>/update/", DishUpdateView.as_view(), name="dish-update"),
     path("dishes/<int:pk>/delete/", DishDeleteView.as_view(), name="dish-delete"),
-    path("dishes/<int:pk>/switch_assign_cook", switch_assign_to_food, name="switch-assign-cook"),
+    path("dishes/<int:pk>/switch_assign_cook/", switch_assign_to_food, name="switch-assign-cook"),
     path("cooks-list/", CookListView.as_view(), name="cooks-list"),
-    path("cooks/create", CookCreateView.as_view(), name="cooks-create"),
+    path("cooks/create/", CookCreateView.as_view(), name="cooks-create"),
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cooks-detail"),
-    path("cooks/<int:pk>/update", CookUpdateView.as_view(), name="cooks-update"),
-    path("cooks/<int:pk>/delete", CookDeleteView.as_view(), name="cooks-delete")
+    path("cooks/<int:pk>/update/", CookUpdateView.as_view(), name="cooks-update"),
+    path("cooks/<int:pk>/delete/", CookDeleteView.as_view(), name="cooks-delete")
 ]
 
 app_name = "kitchen_core"
