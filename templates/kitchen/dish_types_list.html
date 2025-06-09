@@ -1,0 +1,91 @@
+{% extends 'layouts/base-presentation.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-7">  <!-- Додано mt-7 -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Dish Types</h1>
+    <a href="{% url 'kitchen_core:dish-types-create' %}" class="btn btn-primary btn-lg">
+      <i class="fas fa-plus me-2"></i>Create New
+    </a>
+  </div>
+
+  {% if dish_types_list %}
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>  <!-- Відображаємо ID для всіх екранів -->
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dish_type in dish_types_list %}
+            <tr>
+              <td data-label="ID">{{ dish_type.id }}</td>  <!-- Додано data-label для мобільної версії -->
+              <td data-label="Name">{{ dish_type.name }}</td>
+              <td data-label="Actions">
+                <div class="d-flex gap-2">
+                  <a href="{% url 'kitchen_core:dish-types-update' pk=dish_type.id %}" 
+                     class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-edit me-1 d-none d-sm-inline"></i>
+                    <span>Update</span>
+                  </a>
+                  <a href="{% url 'kitchen_core:dish-types-delete' pk=dish_type.id %}" 
+                     class="btn btn-sm btn-outline-danger">
+                    <i class="fas fa-trash-alt me-1 d-none d-sm-inline"></i>
+                    <span>Delete</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info">
+      <i class="fas fa-info-circle me-2"></i>
+      There are no dish types in the service.
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    .table-responsive {
+      border: 0;
+    }
+    .table-responsive thead {
+      display: none;
+    }
+    .table-responsive tr {
+      margin-bottom: 1rem;
+      display: block;
+      border: 1px solid #dee2e6;
+      border-radius: 0.25rem;
+    }
+    .table-responsive td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f8f9fa;
+      padding: 0.75rem;
+    }
+    .table-responsive td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      margin-right: 1rem;
+      flex: 0 0 30%;
+    }
+    .table-responsive td:last-child {
+      border-bottom: 0;
+    }
+    .table-responsive .d-flex {
+      justify-content: flex-end;
+      flex: 1;
+    }
+  }
+</style>
+{% endblock %}
