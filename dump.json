@@ -1,0 +1,180 @@
+[
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 1,
+    "fields": {
+        "name": "Суп"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 2,
+    "fields": {
+        "name": "Торт"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 3,
+    "fields": {
+        "name": "Каша"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 4,
+    "fields": {
+        "name": "М'ясне"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 6,
+    "fields": {
+        "name": "Вегетаріанське"
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$6yZ6pobHctbyH77ztIns57$KV6AcM4MAsKWy4pQ+j8FM33jrBEMb7wyJxm6kJgN+m4=",
+        "last_login": "2025-06-09T15:16:57.355Z",
+        "is_superuser": true,
+        "username": "admin.user",
+        "first_name": "",
+        "last_name": "",
+        "email": "dimkanividimka4@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-05-20T16:34:58.429Z",
+        "years_of_experience": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$8pcntq1zdJshgKlTVV55Yu$AtzndP04/OuW75ZTnxZzYoCYPxSAN1MXg7Xj9X3kROM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "mirabool",
+        "first_name": "Miroslava",
+        "last_name": "Jurivna",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-27T21:02:11.870Z",
+        "years_of_experience": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$UPosFBQCuxSR41aWSX86sv$uLFSl62NRpjT0xz1cFfYtvxZulrDGollT2oZcqRvKN4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "elenaprekrasnaya",
+        "first_name": "Elena",
+        "last_name": "Nikolaevna",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-31T15:22:06.199Z",
+        "years_of_experience": 50,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$27DFLGePoR8USkzTcLcxPl$oB3UEBQg04u96+aXTTdGQQ7oLwX8YTHhvHp1slvoL00=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "anjelaprekrasnaya",
+        "first_name": "Anjela",
+        "last_name": "Kurbanovna",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-31T15:35:29.416Z",
+        "years_of_experience": 48,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 1,
+    "fields": {
+        "name": "Грибний суп",
+        "description": "Містить гриби, дуже смачний.",
+        "price": "50.00",
+        "dish_type": 1,
+        "cooks": [
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 2,
+    "fields": {
+        "name": "Рибний суп",
+        "description": "Містить рибу, дуже смачний.",
+        "price": "60.00",
+        "dish_type": 1,
+        "cooks": [
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 3,
+    "fields": {
+        "name": "Торт мурашник",
+        "description": "Містить горіхи, дуже смачний.",
+        "price": "250.00",
+        "dish_type": 2,
+        "cooks": [
+            1,
+            4
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 4,
+    "fields": {
+        "name": "Перлова",
+        "description": "Містить перловку, дуже смачна.",
+        "price": "35.00",
+        "dish_type": 3,
+        "cooks": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 5,
+    "fields": {
+        "name": "Пюре",
+        "description": "Містить багато картоплі, дуже смачне.",
+        "price": "35.00",
+        "dish_type": 3,
+        "cooks": [
+            2
+        ]
+    }
+}
+]
