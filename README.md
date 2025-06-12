@@ -1,5 +1,6 @@
 # Dish tracking system
 https://restaurant-kitchen-mate-0jwr.onrender.com/
+Test user - username: user, password: user12345
 
 # About
 
